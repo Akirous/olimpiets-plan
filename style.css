@@ -1,0 +1,39 @@
+:root { color: #162b3d; background: #eef4f8; font-family: system-ui, sans-serif; color-scheme: light; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+main { max-width: 1120px; margin: auto; padding: clamp(12px, 3vw, 32px); }
+header { display: flex; justify-content: space-between; align-items: start; gap: 12px; margin-bottom: 18px; }
+h1, h2, h3, p { margin: 0; }
+h1 { font-size: clamp(1.65rem, 4vw, 2.3rem); }
+h2 { font-size: 1.3rem; }
+h3 { font-size: 1.05rem; }
+header p, [role="status"], [data-details] { color: #425c71; }
+[role="status"]:empty { display: none; }
+form, article, [data-workspace] { display: grid; gap: 12px; }
+form { max-width: 440px; margin-top: 12px; }
+label { display: grid; gap: 5px; font-weight: 600; }
+input, button, textarea, select { font: inherit; color: inherit; border: 1px solid #a8bac8; background: #fff; border-radius: 8px; padding: 9px 11px; min-height: 44px; }
+input, textarea, select { width: 100%; min-width: 0; }
+textarea { resize: vertical; }
+button { cursor: pointer; }
+button:hover { background: #e6f0f7; }
+button:disabled { opacity: .65; cursor: wait; }
+button.primary { background: #115b91; border-color: #115b91; color: white; }
+button.primary:hover { background: #0b4775; }
+.actions { display: flex; flex-wrap: wrap; align-items: end; gap: 8px; }
+.actions label { min-width: min(100%, 250px); }
+.plan-scroll { overflow: auto; background: #fff; border: 1px solid #a8bac8; border-radius: 8px; }
+[data-plan] { display: block; width: 100%; height: auto; }
+.plan-scroll.enlarged [data-plan] { width: max(1050px, 145%); }
+.hit { fill: rgb(19 108 172 / 10%); stroke: transparent; stroke-width: 2; vector-effect: non-scaling-stroke; cursor: pointer; }
+.hit:hover { fill: rgb(19 108 172 / 24%); }
+.hit.active { fill: rgb(19 108 172 / 42%); stroke: #126eb0; }
+.number { fill: white; text-anchor: middle; dominant-baseline: central; font: 600 22px system-ui; }
+.plate { fill: #115b91; }
+[data-labels] { pointer-events: none; }
+.notes { padding: 0; margin: 0; list-style: none; display: grid; gap: 8px; }
+.notes li, .initial { background: #fff; padding: 9px 12px; border-radius: 8px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.notes li p { margin-top: 4px; }
+[data-recent] { margin-top: 9px; }
+[data-recent] button { text-align: left; max-width: 100%; overflow-wrap: anywhere; }

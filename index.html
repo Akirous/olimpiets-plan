@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src https://nyjxmkyegndngeibsftx.supabase.co; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <title>Олимпиец · План и заметки</title>
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="./vendor/supabase.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <main>
+    <header>
+      <div><h1>Олимпиец</h1><p>План помещений и заметки команды</p></div>
+      <button type="button" data-logout hidden>Выйти</button>
+    </header>
+    <p data-session role="status"></p>
+    <form data-login hidden>
+      <label>Email<input name="email" type="email" autocomplete="username" required></label>
+      <label>Пароль<input name="password" type="password" autocomplete="current-password" required></label>
+      <button class="primary" type="submit">Войти</button>
+    </form>
+    <section data-workspace hidden>
+      <div class="actions">
+        <label>Помещение <select data-room></select></label>
+        <button type="button" data-zoom aria-pressed="false">Увеличить план</button>
+      </div>
+      <div class="plan-scroll" data-scroll>
+        <svg data-plan viewBox="0 0 1601 758" aria-label="План помещений" role="img">
+          <image data-drawing width="1601" height="758"></image>
+          <g data-shapes></g>
+          <g data-labels aria-hidden="true"></g>
+        </svg>
+      </div>
+      <article>
+        <h2 data-title></h2>
+        <p data-details></p>
+        <p class="initial" data-initial hidden></p>
+        <h3>Заметки комнаты</h3>
+        <ul data-notes class="notes"></ul>
+        <p data-room-status role="status"></p>
+        <label>Новая заметка<textarea data-note rows="3" maxlength="2000" placeholder="Что сделали, что измерили или что нужно уточнить"></textarea></label>
+        <div class="actions">
+          <button class="primary" type="button" data-save>Добавить заметку</button>
+          <button type="button" data-refresh>Обновить</button>
+          <button type="button" data-export>Скачать заметки</button>
+        </div>
+        <p data-action-status role="status"></p>
+      </article>
+      <section>
+        <h2>Последние заметки</h2>
+        <ul data-recent class="notes"></ul>
+        <p data-recent-status role="status"></p>
+      </section>
+      <section data-admin hidden>
+        <details>
+          <summary>Участники · администрирование</summary>
+          <ul data-members class="notes"></ul>
+          <form data-member-form>
+            <label>Email подтверждённого аккаунта<input type="email" name="email" required></label>
+            <label>Имя в заметках<input name="name" maxlength="80" required></label>
+            <button class="primary" type="submit">Добавить участника</button>
+          </form>
+          <p data-admin-status role="status"></p>
+        </details>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
