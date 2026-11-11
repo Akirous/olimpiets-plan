@@ -14,7 +14,10 @@
   <main>
     <header>
       <div><h1>Олимпиец</h1><p>План помещений и заметки команды</p></div>
-      <button type="button" data-logout hidden>Выйти</button>
+      <div class="actions">
+        <button type="button" data-admin-jump hidden>Участники</button>
+        <button type="button" data-logout hidden>Выйти</button>
+      </div>
     </header>
     <p data-session role="status"></p>
     <form data-login hidden>
@@ -54,18 +57,18 @@
         <ul data-recent class="notes"></ul>
         <p data-recent-status role="status"></p>
       </section>
-      <section data-admin hidden>
-        <details>
-          <summary>Участники · администрирование</summary>
-          <ul data-members class="notes"></ul>
-          <form data-member-form>
-            <label>Email подтверждённого аккаунта<input type="email" name="email" required></label>
-            <label>Имя в заметках<input name="name" maxlength="80" required></label>
-            <button class="primary" type="submit">Добавить участника</button>
-          </form>
-          <p data-admin-status role="status"></p>
-        </details>
-      </section>
+    </section>
+    <section data-admin hidden>
+      <details>
+        <summary>Участники · администрирование</summary>
+        <ul data-members class="notes"></ul>
+        <form data-member-form>
+          <label>Email подтверждённого аккаунта<input type="email" name="email" required></label>
+          <label>Имя в заметках<input name="name" maxlength="80" required></label>
+          <button class="primary" type="submit">Добавить участника</button>
+        </form>
+        <p data-admin-status role="status"></p>
+      </details>
     </section>
   </main>
 </body>

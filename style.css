@@ -37,3 +37,5 @@ button.primary:hover { background: #0b4775; }
 .notes li p { margin-top: 4px; }
 [data-recent] { margin-top: 9px; }
 [data-recent] button { text-align: left; max-width: 100%; overflow-wrap: anywhere; }
+[data-admin] { margin-top: 18px; }
+[data-admin] summary { cursor: pointer; font-weight: 600; margin-bottom: 8px; }

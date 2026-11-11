@@ -48,6 +48,8 @@ function clearWorkspace() {
   recentRequest++;
   workspace.hidden = true;
   $('[data-admin]').hidden = true;
+  $('[data-admin-jump]').hidden = true;
+  $('[data-admin] details').open = false;
   $('[data-members]').replaceChildren();
   $('[data-member-form]').reset();
   logout.hidden = true;
@@ -162,6 +164,7 @@ async function openWorkspace(session) {
   login.hidden = true;
   logout.hidden = false;
   account.textContent = 'Проверяю доступ…';
+  let accountLabel;
   try {
     const member = result(await client.from('olimpiets_members').select('display_name,member_role')
       .eq('user_id', session.user.id).maybeSingle());
@@ -170,6 +173,14 @@ async function openWorkspace(session) {
       account.textContent = 'Этот аккаунт ещё не добавлен в команду «Олимпийца».';
       return;
     }
+    const admin = member.member_role === 'admin';
+    accountLabel = 'Вы вошли как ' + member.display_name + (admin ? ' · администратор' : ' · участник');
+    account.textContent = accountLabel;
+    if (admin) {
+      $('[data-admin]').hidden = false;
+      $('[data-admin-jump]').hidden = false;
+      void refreshMembers();
+    }
     const blob = result(await client.storage.from('olimpiets-private').download('plan.json'));
     const data = JSON.parse(await blob.text());
     if (request !== sessionRequest) return;
@@ -177,20 +188,16 @@ async function openWorkspace(session) {
       throw new Error('Invalid plan');
     }
     plan = data;
-    account.textContent = 'Вы вошли как ' + member.display_name;
     draw();
     workspace.hidden = false;
-    if (member.member_role === 'admin') {
-      $('[data-admin]').hidden = false;
-      void refreshMembers();
-    }
     showRoom(findRoom(19)?.[0] ?? plan.rooms[0][0]);
     void refreshRecent();
   } catch (error) {
     if (request !== sessionRequest) return;
-    account.textContent = error?.code === 'PGRST205' || error?.code === '42P01'
+    const message = error?.code === 'PGRST205' || error?.code === '42P01'
       ? 'В проекте ещё не настроены таблицы. Обратитесь к владельцу.'
       : 'План не открылся. Проверьте сеть и обратитесь к владельцу, если ошибка повторится.';
+    account.textContent = accountLabel ? accountLabel + '. ' + message : message;
   }
 }
 
@@ -234,6 +241,12 @@ if (!client) {
 }
 
 selector.addEventListener('change', () => showRoom(Number(selector.value)));
+$('[data-admin-jump]').addEventListener('click', () => {
+  const details = $('[data-admin] details');
+  details.open = true;
+  details.scrollIntoView({ block: 'start' });
+  details.querySelector('summary').focus({ preventScroll: true });
+});
 $('[data-zoom]').addEventListener('click', event => {
   const enlarged = $('[data-scroll]').classList.toggle('enlarged');
   event.currentTarget.setAttribute('aria-pressed', String(enlarged));
