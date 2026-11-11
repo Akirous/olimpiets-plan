@@ -196,7 +196,7 @@ async function openWorkspace(session) {
 
 const client = window.supabase?.createClient(
   'https://nyjxmkyegndngeibsftx.supabase.co',
-  'sb_publishable_s6e_ogMsqMYgSB9KYxxcxg_vCOIppKe1',
+  'sb_publishable_H2rWel6UdAekl7jQXGQNVg_1oexS-JO',
   { auth: { detectSessionInUrl: false } }
 );
 
